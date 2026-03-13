@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Pet_Store_Back_API.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException();
+builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<PetStoreContext>();
 
 var app = builder.Build();
 
@@ -20,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
 
