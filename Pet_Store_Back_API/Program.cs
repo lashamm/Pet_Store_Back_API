@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Pet_Store_Back_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Database
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<PetStoreContext>();
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+// Register DbContext
+builder.Services.AddDbContext<PetStoreContext>(options =>
+    options.UseSqlServer(connectionString));
+
+// Identity
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+       .AddEntityFrameworkStores<PetStoreContext>();
 
 var app = builder.Build();
 

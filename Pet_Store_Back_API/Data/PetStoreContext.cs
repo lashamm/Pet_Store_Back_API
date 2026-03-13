@@ -5,11 +5,11 @@ namespace Pet_Store_Back_API.Data
 {
     public class PetStoreContext : IdentityDbContext
     {
-        public PetStoreContext(DbContextOptions<PetStoreContext> options) : base(options)
-        { }
-        public PetStoreContext() { }
-
         public PetStoreContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        protected PetStoreContext()
         {
         }
 
