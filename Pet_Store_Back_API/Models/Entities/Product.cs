@@ -15,7 +15,7 @@ namespace Pet_Store_Back_API.Models.Entities
         [Column("description")]
         public string Description { get; set; }
         [Required]
-        [Column("price")]
+        [Column("price", TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         [Column("is_available")]
         public bool IsAvailable { get; set; }
