@@ -9,13 +9,19 @@ namespace Pet_Store_Back_API.Models.Entities
         [Key]
         [Column("id")]
         public int Id { get; set; }
+
         [Required]
         [Column("name")]
         public string Name { get; set; }
+
         // foreign key to PetCategory enum
-        [ForeignKey("pet_category_id")]
+        [ForeignKey(nameof(PetCategory))]
         public int PetCategoryId { get; set; }
-        [NotMapped]
-        public PetCategory PetCategory { get; set; }
+
+        [Required]
+        [Column("pet_category_id")]
+        public Pet PetCategory { get; set; }
+
+        public List<Product> Products { get; set; } 
     }
 }

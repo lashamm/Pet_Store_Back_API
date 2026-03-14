@@ -14,7 +14,10 @@ namespace Pet_Store_Back_API.Models.Entities
         [Column("quantity")]
         public int Quantity { get; set; }
         // foreign key to Order
-        [ForeignKey("order_id")]
+
+        [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
+
+        public Product Product { get; set; }
     }
 }

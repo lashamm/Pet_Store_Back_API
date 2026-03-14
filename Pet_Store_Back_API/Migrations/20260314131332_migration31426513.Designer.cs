@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet_Store_Back_API.Data;
 
@@ -11,9 +12,11 @@ using Pet_Store_Back_API.Data;
 namespace Pet_Store_Back_API.Migrations
 {
     [DbContext(typeof(PetStoreContext))]
-    partial class PetStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20260314131332_migration31426513")]
+    partial class migration31426513
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,17 +394,7 @@ namespace Pet_Store_Back_API.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("price");
 
-                    b.Property<int?>("ProductCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductCategoryId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Product");
                 });
@@ -424,8 +417,6 @@ namespace Pet_Store_Back_API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PetCategoryId");
 
                     b.ToTable("ProductCategories");
                 });
@@ -585,41 +576,9 @@ namespace Pet_Store_Back_API.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Pet_Store_Back_API.Models.Entities.Product", b =>
-                {
-                    b.HasOne("Pet_Store_Back_API.Models.Entities.ProductCategory", null)
-                        .WithMany("Products")
-                        .HasForeignKey("ProductCategoryId");
-
-                    b.HasOne("Pet_Store_Back_API.Models.Entities.Product", null)
-                        .WithMany("Products")
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("Pet_Store_Back_API.Models.Entities.ProductCategory", b =>
-                {
-                    b.HasOne("Pet_Store_Back_API.Models.Entities.Pet", "PetCategory")
-                        .WithMany()
-                        .HasForeignKey("PetCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PetCategory");
-                });
-
             modelBuilder.Entity("Pet_Store_Back_API.Models.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("Pet_Store_Back_API.Models.Entities.Product", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Pet_Store_Back_API.Models.Entities.ProductCategory", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

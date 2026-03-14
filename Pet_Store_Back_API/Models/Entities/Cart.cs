@@ -10,7 +10,8 @@ namespace Pet_Store_Back_API.Models.Entities
         public int Id { get; set; }
         [NotMapped]
         // foreign key to User
-        [ForeignKey("user_id")]
+        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

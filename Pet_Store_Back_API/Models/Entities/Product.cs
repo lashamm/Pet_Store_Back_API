@@ -23,5 +23,7 @@ namespace Pet_Store_Back_API.Models.Entities
         public string ImageUrl { get; set; }
         [Column("category")]
         public CategoryName Category { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }
