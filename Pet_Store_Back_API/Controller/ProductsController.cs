@@ -9,6 +9,10 @@ namespace Pet_Store_Back_API.Controller
     public class ProductsController : ControllerBase
     {
         private readonly Data.PetStoreContext context;
+        ProductsController(Data.PetStoreContext context)
+        {
+            this.context = context;
+        }
 
         [HttpGet("GetProduct")]
         public async Task<IActionResult> GetProducts()
@@ -37,7 +41,7 @@ namespace Pet_Store_Back_API.Controller
         }
 
 
-        [HttpPut("UpdateProduct/{id}")]
+        [HttpPost("UpdateProduct/{id}")]
         public async Task<IActionResult> UpdateProduct(int id, Models.Entities.Product updatedProduct)
         {
             var product = context.Product.FirstOrDefault(p => p.Id == id);
